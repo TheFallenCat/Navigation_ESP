@@ -11,8 +11,11 @@ Shader "Custom/WaveShader"
         //_Steepness ("Steepness", Range(0, 1)) = 0.5
         //_Wavelength ("WaveLength", Float) = 10
         //_Direction("Direction", Vector) = (1,0,0,0)
-        _WaveA ("Wave A (dir, steepness, wavelength)", Vector) = (1,0,0.5,10)
-        _WaveB ("Wave B", Vector) = (0, 1, 0.25, 20)
+
+        _PrimaryWave ("Primary wave (dir, steepness, wavelength)", Vector) = (1, 0, 0.2, 50)
+        _SecondaryWave ("Secondary wave", Vector) = (0.7, 0.7, 0.1, 30)
+        _ChoppyWave ("Choppy wave", Vector) = (0.5, -0.5, 0.05, 15)
+        _TurbulanceWave ("Turbulence wave", Vector) = (-1, 0.3, 0.03, 10)
         //_Speed ("Speed", Float) = 1
 
 
@@ -50,7 +53,7 @@ Shader "Custom/WaveShader"
 
         //float _Steepness, _Wavelength; //, _Speed;
         //float2 _Direction;
-        float4 _WaveA, _WaveB;
+        float4 _PrimaryWave, _SecondaryWave, _ChoppyWave, _TurbulanceWave;
 
         float3 GerstnerWave (
 			float4 wave, float3 p, inout float3 tangent, inout float3 binormal
@@ -102,8 +105,10 @@ Shader "Custom/WaveShader"
             float3 p = gridPoint;
             
             //Vertex Transformations
-            p += GerstnerWave(_WaveA, worldPos.xyz, tangent, binormal);
-            p += GerstnerWave(_WaveB, worldPos.xyz, tangent, binormal);
+            p += GerstnerWave(_PrimaryWave, worldPos.xyz, tangent, binormal);
+            p += GerstnerWave(_SecondaryWave, worldPos.xyz, tangent, binormal);
+            p += GerstnerWave(_ChoppyWave, worldPos.xyz, tangent, binormal);
+            p += GerstnerWave(_TurbulanceWave, worldPos.xyz, tangent, binormal);
            
             
             
