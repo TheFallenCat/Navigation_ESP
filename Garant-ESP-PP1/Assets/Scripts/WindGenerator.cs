@@ -6,16 +6,12 @@ using UnityEngine;
 public class WindGenerator : MonoBehaviour
 {
     
-    [SerializeField] Vector3 activeWindDirection;
-    [SerializeField] float activeWindSpeed;
+    public Vector3 activeWindDirection;
+    public float activeWindSpeed;
 
     [SerializeField] int windSwitchTimer = 300;
     [SerializeField] int windSwitchDuration = 10;
     public bool onHighSea;
-
-    [SerializeField] Material ocean;
-
-    [SerializeField] float angleTest;
 
     // Start is called before the first frame update
     void Start()
@@ -62,7 +58,6 @@ public class WindGenerator : MonoBehaviour
         float angle;//Vector3.Angle(windDirection, activeWindDirection);
         Vector3 temp1 = Vector3.zero;
         temp.ToAngleAxis(out angle, out temp1);
-        angleTest = angle;
         if (angle > 180)
         {
             angle = (angle - 180) * -1;
@@ -77,16 +72,8 @@ public class WindGenerator : MonoBehaviour
             rotatedDirection = RotateVector(anglePerIteration, activeWindDirection);
             activeWindDirection = rotatedDirection;
             activeWindSpeed += windSpeedDeltaPerIteration;
-            SetPrimaryWave();
             yield return new WaitForFixedUpdate();
         }
-    }
-
-    void SetPrimaryWave()
-    {
-        
-        Vector4 primaryWave = new Vector4(activeWindDirection.x, activeWindDirection.z, 0.05f * activeWindSpeed, 50);
-        ocean.SetVector("_PrimaryWave", primaryWave);
     }
 
     Vector3 RotateVector(float angle, Vector3 vector)
