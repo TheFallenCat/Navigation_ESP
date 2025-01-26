@@ -20758,60 +20758,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 827146369}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &841289394
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 841289396}
-  - component: {fileID: 841289395}
-  m_Layer: 0
-  m_Name: WindGenerator
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &841289395
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 841289394}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed559cb72b5933e41b517be211757388, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  windTypes:
-  - {x: 1, y: 0, z: 2}
-  - {x: 1, y: 1, z: 2}
-  - {x: 0, y: 1, z: 2}
-  - {x: -1, y: 0, z: 2}
-  - {x: 0, y: -1, z: 2}
-  - {x: -1, y: -1, z: 2}
-  activeWind: {x: 0, y: 0, z: 0}
-  windSwitchTimer: 2
-  onHighSea: 1
---- !u!4 &841289396
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 841289394}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &845674875
 GameObject:
   m_ObjectHideFlags: 0
@@ -47610,6 +47556,57 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2127297542}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &2130325850
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2130325852}
+  - component: {fileID: 2130325851}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2130325851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2130325850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed559cb72b5933e41b517be211757388, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activeWindDirection: {x: 0, y: 0, z: 0}
+  activeWindSpeed: 0
+  windSwitchTimer: 6
+  windSwitchDuration: 5
+  onHighSea: 1
+  ocean: {fileID: 2100000, guid: 0e08ad4614bc8b3498b104d124bc3f3e, type: 2}
+  angleTest: 0
+--- !u!4 &2130325852
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2130325850}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 63.221367, y: -23.182816, z: -16.377314}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2139715055
 GameObject:
   m_ObjectHideFlags: 0
@@ -48045,4 +48042,4 @@ SceneRoots:
   - {fileID: 472579073}
   - {fileID: 890708201}
   - {fileID: 2064586400}
-  - {fileID: 841289396}
+  - {fileID: 2130325852}
