@@ -47587,8 +47587,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activeWindDirection: {x: 0, y: 0, z: 0}
   activeWindSpeed: 0
-  windSwitchTimer: 6
-  windSwitchDuration: 5
+  windSwitchTimer: 300
+  windSwitchDuration: 60
   onHighSea: 1
   ocean: {fileID: 2100000, guid: 0e08ad4614bc8b3498b104d124bc3f3e, type: 2}
   angleTest: 0
