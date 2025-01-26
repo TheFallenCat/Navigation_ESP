@@ -98,7 +98,7 @@ Shader "Custom/WaveShader"
 
             //Get world position of vertex
             float4 worldPos = mul(unity_ObjectToWorld, vertexData.vertex);
-            float3 gridPoint = vertexData.vertex.xyz;
+            float3 gridPoint = vertexData.vertex.xyz;//vertexData.vertex.xyz;
 
             float3 tangent = float3(1, 0, 0);
             float3 binormal = float3(0, 0, 1);
