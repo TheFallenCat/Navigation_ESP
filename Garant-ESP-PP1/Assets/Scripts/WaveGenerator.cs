@@ -15,10 +15,7 @@ public class WaveGenerator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (windController.onHighSea)
-        {
-            SetPrimaryWave(windController.activeWindDirection, windController.activeWindSpeed);
-        }
+        SetPrimaryWave(windController.activeWindDirection, windController.activeWindSpeed);
     }
 
     void SetPrimaryWave(Vector3 activeWindDirection, float activeWindSpeed)
