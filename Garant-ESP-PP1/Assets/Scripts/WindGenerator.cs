@@ -8,9 +8,17 @@ public class WindGenerator : MonoBehaviour
     
     public Vector3 activeWindDirection;
     public float activeWindSpeed;
+    
+    [System.Serializable]
+    struct WindSpeedBounds
+    {
+        public int min;
+        public int max;
+    }
 
     [SerializeField] int windSwitchTimer = 300;
     [SerializeField] int windSwitchDuration = 10;
+    [SerializeField] WindSpeedBounds windSpeedBounds;
     public bool onHighSea;
 
     // Start is called before the first frame update
@@ -39,7 +47,7 @@ public class WindGenerator : MonoBehaviour
             {
                 float windDirectionX = Random.Range(-1.0f, 1.0f);
                 float windDirectionZ = Random.Range(-1.0f, 1.0f);
-                float windSpeed = Random.Range(1, 6);
+                float windSpeed = Random.Range(windSpeedBounds.min, windSpeedBounds.max + 1);
                 Vector3 newWindDirection = new Vector3(windDirectionX, 0, windDirectionZ); 
                 StartCoroutine(WindTransitionTo(newWindDirection, windSpeed));
             }

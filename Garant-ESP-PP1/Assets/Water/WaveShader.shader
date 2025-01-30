@@ -27,7 +27,7 @@ Shader "Custom/WaveShader"
 
         CGPROGRAM
         // Physically based Standard lighting model, and enable shadows on all light types
-        #pragma surface surf Standard  vertex:vert fullformwardshadows addshadows
+        #pragma surface surf Standard  vertex:vert fullforwardshadows addshadow
 
         // Use shader model 3.0 target, to get nicer looking lighting
         #pragma target 3.0
