@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ContinuousOcean : MonoBehaviour
+public class FollowXYPlayer : MonoBehaviour
 {
     
     [SerializeField] Transform player;

@@ -78,7 +78,7 @@ public class WaveGenerator : MonoBehaviour
         // Wave function
         float f = k * (Vector2.Dot(d, new Vector2(position.x, position.z)) - c * time);
 
-        // Displacement
+        // Apply the function
         float dx = d.x * (a * Mathf.Cos(f));
         float dz = d.y * (a * Mathf.Cos(f));
         float dy = a * Mathf.Sin(f);
@@ -89,17 +89,17 @@ public class WaveGenerator : MonoBehaviour
     // Get wave height at a position
     public float GetWaveHeightAtPosition(Vector3 position, float time)
     {
-        Vector3 displacement = Vector3.zero;
+        Vector3 p = Vector3.zero;
         Vector3 seaLevelPosition = new Vector3(position.x, -1f, position.z);
 
         // Add contributions from all waves
-        displacement += CalculateGerstnerWave(seaLevelPosition, primaryWave, time);
-        displacement += CalculateGerstnerWave(seaLevelPosition, secondaryWave, time);
-        displacement += CalculateGerstnerWave(seaLevelPosition, choppyWave, time);
-        displacement += CalculateGerstnerWave(seaLevelPosition, turbulenceWave, time);
+        p += CalculateGerstnerWave(seaLevelPosition, primaryWave, time);
+        p += CalculateGerstnerWave(seaLevelPosition, secondaryWave, time);
+        p += CalculateGerstnerWave(seaLevelPosition, choppyWave, time);
+        p += CalculateGerstnerWave(seaLevelPosition, turbulenceWave, time);
 
-        // Return the height (Y displacement) only
-        return seaLevelPosition.y + displacement.y;
+        // Return the water height
+        return seaLevelPosition.y + p.y;
     }
 
     /* 
