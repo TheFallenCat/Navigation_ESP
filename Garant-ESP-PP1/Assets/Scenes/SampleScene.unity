@@ -6154,11 +6154,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 880161229}
-  depthBeforeSubmerged: 2
+  depthBeforeSubmerged: 1
   displacementAmount: 10
   floaterCount: 5
   waterDrag: 0.99
-  waterAngularDrag: 0.5
+  waterAngularDrag: 0.2
   waveGenerator: {fileID: 1807038457}
 --- !u!1 &359704182
 GameObject:
@@ -10318,6 +10318,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   windGenerator: {fileID: 2130325851}
+--- !u!114 &564426297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 564426291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 071104331f008db4cbc21ee5048bb85f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 880161227}
 --- !u!1 &569884757
 GameObject:
   m_ObjectHideFlags: 0
@@ -11110,11 +11123,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 880161229}
-  depthBeforeSubmerged: 2
+  depthBeforeSubmerged: 1
   displacementAmount: 10
   floaterCount: 5
   waterDrag: 0.99
-  waterAngularDrag: 0.5
+  waterAngularDrag: 0.2
   waveGenerator: {fileID: 1807038457}
 --- !u!1 &601107228
 GameObject:
@@ -11863,6 +11876,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 633188391}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &633776057
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 633776058}
+  m_Layer: 0
+  m_Name: Rudder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &633776058
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 633776057}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 880161227}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &634159973
 GameObject:
   m_ObjectHideFlags: 0
@@ -15986,11 +16030,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 880161229}
-  depthBeforeSubmerged: 2
+  depthBeforeSubmerged: 1
   displacementAmount: 10
   floaterCount: 5
   waterDrag: 0.99
-  waterAngularDrag: 0.5
+  waterAngularDrag: 0.2
   waveGenerator: {fileID: 1807038457}
 --- !u!1 &802534722
 GameObject:
@@ -17417,6 +17461,7 @@ GameObject:
   - component: {fileID: 880161224}
   - component: {fileID: 880161228}
   - component: {fileID: 880161229}
+  - component: {fileID: 880161230}
   m_Layer: 0
   m_Name: TestCube
   m_TagString: Untagged
@@ -17505,7 +17550,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3.44, y: 2.09, z: 6.24}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 963194228}
@@ -17514,6 +17559,7 @@ Transform:
   - {fileID: 1542102259}
   - {fileID: 801190314}
   - {fileID: 600925657}
+  - {fileID: 633776058}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &880161228
@@ -17563,6 +17609,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &880161230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 880161223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 998ec1e76b2c6bf43816705661d3b96e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Rudder: {fileID: 633776058}
+  SteerPower: 500
+  Power: 5
+  Drag: 0.1
 --- !u!1 &881577447
 GameObject:
   m_ObjectHideFlags: 0
@@ -18966,13 +19028,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.093583755, y: 0.6993559, z: -0.093169205, w: 0.70246917}
-  m_LocalPosition: {x: -17.19, y: 10.2, z: -0.07}
+  m_LocalRotation: {x: 0.20409809, y: -0, z: -0, w: 0.97895044}
+  m_LocalPosition: {x: 0.03, y: 40, z: -9.604}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 880161227}
-  m_LocalEulerAnglesHint: {x: 15.177, y: 89.746, z: 0}
+  m_LocalEulerAnglesHint: {x: 23.553, y: 0, z: 0}
 --- !u!1 &964449326
 GameObject:
   m_ObjectHideFlags: 0
@@ -28812,11 +28874,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 880161229}
-  depthBeforeSubmerged: 2
+  depthBeforeSubmerged: 1
   displacementAmount: 10
   floaterCount: 5
   waterDrag: 0.99
-  waterAngularDrag: 0.5
+  waterAngularDrag: 0.2
   waveGenerator: {fileID: 1807038457}
 --- !u!1 &1544641398
 GameObject:
@@ -33833,6 +33895,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b091a78cd2f26624cb18ae6225d7e5df, type: 3}
       insertIndex: -1
       addedObject: {fileID: 564426294}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b091a78cd2f26624cb18ae6225d7e5df, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 564426297}
   m_SourcePrefab: {fileID: 100100000, guid: b091a78cd2f26624cb18ae6225d7e5df, type: 3}
 --- !u!1 &1847865488
 GameObject:
@@ -35539,11 +35604,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 880161229}
-  depthBeforeSubmerged: 2
+  depthBeforeSubmerged: 1
   displacementAmount: 10
   floaterCount: 5
   waterDrag: 0.99
-  waterAngularDrag: 0.5
+  waterAngularDrag: 0.2
   waveGenerator: {fileID: 1807038457}
 --- !u!1 &1966661427
 GameObject:

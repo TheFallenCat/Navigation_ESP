@@ -10,28 +10,19 @@ public class SailBoatController : MonoBehaviour
 
     [SerializeField] float MaxSpeed = 10f;
 
-    public float angleToWind;
     public float forceOnSail;
-    public float sailEfficiency = 1f; // Efficiency factor (0 to 1)
+    public float sailEfficiency = 50f;
 
     void FixedUpdate()
     {
         
 
         // Get sail direction
-        Vector3 sailForward = sail.forward;
-        Vector3 sailRight = sail.right;
+        Vector3 sailDirection = sail.forward;
 
-        // Decompose wind into components relative to the sail
-        float liftComponent = Vector3.Dot(windGenerator.activeWindDirection.normalized, sailRight);
-        float dragComponent = Vector3.Dot(windGenerator.activeWindDirection.normalized, sailForward);
 
-        // Compute effective force using a simplified aerodynamic model
-        float liftForce = liftComponent * windGenerator.activeWindSpeed * sailEfficiency;
-        float dragForce = Mathf.Abs(dragComponent) * windGenerator.activeWindSpeed * sailEfficiency * 0.5f; // Drag is always positive
-
-        // Compute final force applied to the boat (lift perpendicular, drag parallel)
-        float force = forceOnSail = ((sailRight * liftForce) + (sailForward * dragForce)).magnitude;
+        // Compute final force applied to the boat
+        float force = forceOnSail = sailEfficiency * windGenerator.activeWindSpeed  / Vector3.Distance(sail.forward.normalized, windGenerator.activeWindDirection.normalized);
 
         // Apply force to the boat
         ApplyForceToReachVelocity(rb, Vector3.forward * MaxSpeed, force);
