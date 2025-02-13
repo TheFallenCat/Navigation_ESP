@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FollowXYPlayer : MonoBehaviour
+public class FollowXZPlayer : MonoBehaviour
 {
     
     [SerializeField] Transform player;
@@ -15,6 +15,6 @@ public class FollowXYPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = new Vector3(player.position.x, 0, player.position.z);
+        transform.position = new Vector3(player.position.x, transform.position.y, player.position.z) ;
     }
 }

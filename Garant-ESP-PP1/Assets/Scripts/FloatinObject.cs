@@ -22,7 +22,7 @@ public class FloatinObject : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        rb.AddForceAtPosition(Physics.gravity / floaterCount, transform.position, ForceMode.Acceleration);
+        rb.AddForceAtPosition(Physics.gravity * rb.mass / floaterCount, transform.position, ForceMode.Acceleration);
 
         float waveHeight = waveGenerator.GetWaveHeightAtPosition(transform.position, Time.time);
         if(transform.position.y < waveHeight)

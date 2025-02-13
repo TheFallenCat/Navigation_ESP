@@ -22,10 +22,13 @@ public class SailSpeed : MonoBehaviour
 
 
         // Compute final force applied to the boat
-        float force = forceOnSail = sailEfficiency * windGenerator.activeWindSpeed  / Vector3.Distance(sail.forward.normalized, windGenerator.activeWindDirection.normalized);
+        float force = forceOnSail = sailEfficiency * windGenerator.activeWindSpeed * 20  / Vector3.Distance(sail.forward.normalized, windGenerator.activeWindDirection.normalized);
+
+        if (Input.GetKey(KeyCode.A) | Input.GetKey(KeyCode.D))
+            force /= 2;
 
         // Apply force to the boat
-        ApplyForceToReachVelocity(rb, Vector3.forward * MaxSpeed, force);
+        ApplyForceToReachVelocity(rb, transform.forward * MaxSpeed, force);
     }
 
     void ApplyForceToReachVelocity(Rigidbody rigidbody, Vector3 velocity, float force = 1, ForceMode mode = ForceMode.Force)
