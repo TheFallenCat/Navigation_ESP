@@ -11,24 +11,45 @@ public class SailSpeed : MonoBehaviour
     [SerializeField] float MaxSpeed = 10f;
 
     public float forceOnSail;
-    public float sailEfficiency = 50f;
+    public float angleEfficiency;
+    public float angleDistance;
+    public float sailEfficiency = 1f;
 
     void FixedUpdate()
     {
-        
+
 
         // Get sail direction
         Vector3 sailDirection = sail.forward;
 
 
         // Compute final force applied to the boat
-        float force = forceOnSail = sailEfficiency * windGenerator.activeWindSpeed * 20  / Vector3.Distance(sail.forward.normalized, windGenerator.activeWindDirection.normalized);
+        angleDistance = Vector3.Distance(sail.forward.normalized, windGenerator.activeWindDirection.normalized);
+        angleEfficiency = -Mathf.Log(Vector3.Distance(sail.forward.normalized, windGenerator.activeWindDirection.normalized));
+        if (angleEfficiency < 0)
+            angleEfficiency = 0;
+        float force = windGenerator.activeWindSpeed * angleEfficiency;
+        if (force <= 0)
+        {
+            force = 1f;
+        }
+        forceOnSail = sailEfficiency * force;
+        
 
-        if (Input.GetKey(KeyCode.A) | Input.GetKey(KeyCode.D))
-            force /= 2;
+        //if (Input.GetKey(KeyCode.A) | Input.GetKey(KeyCode.D))
+        //    forceOnSail /= 2;
 
         // Apply force to the boat
-        ApplyForceToReachVelocity(rb, transform.forward * MaxSpeed, force);
+        ApplyForceToReachVelocity(rb, transform.forward * MaxSpeed, forceOnSail);
+    }
+
+    public void SwitchAnchor()
+    {
+        if (sailEfficiency == 0)
+            sailEfficiency = 1f;
+        else
+            sailEfficiency = 0f;
+
     }
 
     void ApplyForceToReachVelocity(Rigidbody rigidbody, Vector3 velocity, float force = 1, ForceMode mode = ForceMode.Force)
