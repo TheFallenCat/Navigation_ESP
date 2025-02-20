@@ -18,6 +18,7 @@ public class ShipController : MonoBehaviour
     //used Components
     Rigidbody Rigidbody;
     SailSpeed SailSpeed;
+    Controller Controller;
     public bool canAnchor = false;
     public bool isAnchored = false;
 
@@ -25,6 +26,7 @@ public class ShipController : MonoBehaviour
     {
         Rigidbody = GetComponent<Rigidbody>();
         SailSpeed = GetComponent<SailSpeed>();
+        Controller = GameObject.Find("Controller").GetComponent<Controller>();
     }
 
     public void FixedUpdate()
@@ -49,11 +51,14 @@ public class ShipController : MonoBehaviour
             {
                 isAnchored = false;
                 SailSpeed.SwitchAnchor();
+                Controller.SetSail();
+                
             }
             else if (canAnchor)
             {
                 isAnchored = true;
                 SailSpeed.SwitchAnchor();
+                Controller.AnchorAtPort();
             }
 
         }

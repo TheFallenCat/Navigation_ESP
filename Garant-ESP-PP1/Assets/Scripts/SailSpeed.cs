@@ -28,10 +28,10 @@ public class SailSpeed : MonoBehaviour
         angleEfficiency = -Mathf.Log(Vector3.Distance(sail.forward.normalized, windGenerator.activeWindDirection.normalized));
         if (angleEfficiency < 0)
             angleEfficiency = 0;
-        float force = windGenerator.activeWindSpeed * angleEfficiency;
-        if (force <= 0)
+        float force = windGenerator.activeWindSpeed * angleEfficiency * 5;
+        if (force <= 5f)
         {
-            force = 1f;
+            force = 5f;
         }
         forceOnSail = sailEfficiency * force;
         
