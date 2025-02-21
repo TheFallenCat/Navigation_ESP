@@ -14,6 +14,7 @@ public class SailSpeed : MonoBehaviour
     public float angleEfficiency;
     public float angleDistance;
     public float sailEfficiency = 1f;
+    public float atSea = 1;
 
     void FixedUpdate()
     {
@@ -33,7 +34,7 @@ public class SailSpeed : MonoBehaviour
         {
             force = 5f;
         }
-        forceOnSail = sailEfficiency * force;
+        forceOnSail = sailEfficiency * force * atSea;
         
 
         //if (Input.GetKey(KeyCode.A) | Input.GetKey(KeyCode.D))
@@ -45,10 +46,10 @@ public class SailSpeed : MonoBehaviour
 
     public void SwitchAnchor()
     {
-        if (sailEfficiency == 0)
-            sailEfficiency = 1f;
+        if (atSea == 0)
+            atSea = 1f;
         else
-            sailEfficiency = 0f;
+            atSea = 0f;
 
     }
 
