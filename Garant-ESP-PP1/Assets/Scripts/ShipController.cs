@@ -10,7 +10,6 @@ public class ShipController : MonoBehaviour
     //visible Properties
     [SerializeField] Transform Rudder;
     [SerializeField] float SteerPower = 500f;
-    [SerializeField] float Power = 5f;
     [SerializeField] float Drag = 0.1f;
 
 
