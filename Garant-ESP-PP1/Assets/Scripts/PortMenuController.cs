@@ -28,5 +28,6 @@ public class PortMenuController : MonoBehaviour
     public void activatePort(int portIndex)
     {
         EnablePortMenuGUI();
+
     }
 }

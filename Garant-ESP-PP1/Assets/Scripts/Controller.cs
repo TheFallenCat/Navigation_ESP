@@ -21,10 +21,10 @@ public class Controller : MonoBehaviour
     private void LockCameraControl() => freeLook.enabled = false;
     private void UnlockCameraControl() => freeLook.enabled = true;
 
-    public void AnchorAtPort()
+    public void AnchorAtPort(int portindex)
     {
         LockCameraControl();
-        portMenuController.activatePort(0);
+        portMenuController.activatePort(portindex);
     }
 
     public void SetSail()

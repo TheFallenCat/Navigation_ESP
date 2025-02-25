@@ -19,7 +19,6 @@ public class ShipController : MonoBehaviour
     Rigidbody Rigidbody;
     SailSpeed SailSpeed;
     Controller Controller;
-    public bool canAnchor = false;
     public bool isAnchored = false;
 
     public void Awake()
@@ -43,27 +42,6 @@ public class ShipController : MonoBehaviour
         Steering(steer);
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            if (isAnchored)
-            {
-                isAnchored = false;
-                SailSpeed.SwitchAnchor();
-                Controller.SetSail();
-                
-            }
-            else if (canAnchor)
-            {
-                isAnchored = true;
-                SailSpeed.SwitchAnchor();
-                Controller.AnchorAtPort();
-            }
-
-        }
-    }
-
     void Steering(int steer)
     {
         //Rotational Force
@@ -80,18 +58,25 @@ public class ShipController : MonoBehaviour
         Rigidbody.velocity = Quaternion.AngleAxis(Vector3.SignedAngle(Rigidbody.velocity, (movingForward ? 1f : 0f) * transform.forward, Vector3.up) * Drag, Vector3.up) * Rigidbody.velocity;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("AnchorPoint"))
         {
-            canAnchor = true;
-        }
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("AnchorPoint"))
-        {
-            canAnchor = false;
+            int portIndex = other.GetComponent<PortAnchor>().portIndex;
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                if (isAnchored)
+                {
+                    isAnchored = false;
+                    Controller.SetSail();
+                }
+                else
+                {
+                    isAnchored = true;
+                    Controller.AnchorAtPort(portIndex);
+                }
+                SailSpeed.SwitchAnchor();
+            }
         }
     }
 }
