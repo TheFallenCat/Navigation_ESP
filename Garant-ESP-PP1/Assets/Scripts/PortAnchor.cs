@@ -4,16 +4,30 @@ using UnityEngine;
 
 public class PortAnchor : MonoBehaviour
 {
-    public int portIndex;
-    // Start is called before the first frame update
-    void Start()
+
+    //To parse from JSON file later
+    [System.Serializable]
+    struct portStatus
     {
-        
+        public int statusIndex;
+        public string settingDescription;
+        public List<portAction> portActions;
     }
 
-    // Update is called once per frame
-    void Update()
+    [System.Serializable]
+    struct portAction
     {
-        
+        public string actionName;
+        public int actionEffect;
+    }
+
+    public int portIndex;
+    public int portProgressIndex;
+
+    [SerializeField] List<portStatus> PortData;
+    
+    public string getSettingDescription()
+    {
+        return "";
     }
 }

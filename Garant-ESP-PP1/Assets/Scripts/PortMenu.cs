@@ -4,20 +4,26 @@ using UnityEngine;
 
 public class PortMenu : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    bool isOpening = false;
+  
+    //
+    // These functions are called using animation events. They are to ensure the proper opening and closing of the menu by the PortMenuController.
+    //
+
+    void OpenThis()
     {
-        
+        isOpening = true;
+    }
+
+    void CloseThis()
+    {
+        isOpening = false;
     }
 
     void DisableThis()
     {
-        this.gameObject.SetActive(false);
+        if (!isOpening)
+            this.gameObject.SetActive(false);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

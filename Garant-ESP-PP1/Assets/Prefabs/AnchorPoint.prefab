@@ -103,8 +103,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5895972775101305062}
-  - component: {fileID: 8612491901247922424}
   - component: {fileID: 6302033128788273639}
+  - component: {fileID: 4720124107402369273}
   m_Layer: 0
   m_Name: AnchorPoint
   m_TagString: AnchorPoint
@@ -128,8 +128,22 @@ Transform:
   - {fileID: 4011459677140959039}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &8612491901247922424
-SphereCollider:
+--- !u!114 &6302033128788273639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6796788512993321128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 461e78811a243644eb4d806e1f95f109, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  portIndex: 0
+  portProgressIndex: 0
+--- !u!136 &4720124107402369273
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -146,19 +160,8 @@ SphereCollider:
   m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
+  serializedVersion: 2
   m_Radius: 6
+  m_Height: 20
+  m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6302033128788273639
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6796788512993321128}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 461e78811a243644eb4d806e1f95f109, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  portIndex: 0

@@ -18,7 +18,11 @@ public class ShipController : MonoBehaviour
     Rigidbody Rigidbody;
     SailSpeed SailSpeed;
     Controller Controller;
+
+
     public bool isAnchored = false;
+    public bool canAnchor = false;
+    public bool tryAnchor = false;
 
     public void Awake()
     {
@@ -41,6 +45,30 @@ public class ShipController : MonoBehaviour
         Steering(steer);
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+
+            if (isAnchored)
+            {
+                isAnchored = false;
+                Controller.SetSail();
+                SailSpeed.SwitchAnchor();
+            } else
+            {
+                StartCoroutine(TryAnchor());
+            }
+        }
+    }
+
+    IEnumerator TryAnchor()
+    {
+        tryAnchor = true;
+        yield return new WaitForFixedUpdate();
+        tryAnchor = false;
+    }
+
     void Steering(int steer)
     {
         //Rotational Force
@@ -57,25 +85,24 @@ public class ShipController : MonoBehaviour
         Rigidbody.velocity = Quaternion.AngleAxis(Vector3.SignedAngle(Rigidbody.velocity, (movingForward ? 1f : 0f) * transform.forward, Vector3.up) * Drag, Vector3.up) * Rigidbody.velocity;
     }
 
+
+
     private void OnTriggerStay(Collider other)
     {
+        //Check for ports, 
         if (other.CompareTag("AnchorPoint"))
         {
-            int portIndex = other.GetComponent<PortAnchor>().portIndex;
-            if (Input.GetKeyDown(KeyCode.E))
+            canAnchor = true;
+            PortAnchor port = other.GetComponent<PortAnchor>();
+            if (tryAnchor)
             {
-                if (isAnchored)
-                {
-                    isAnchored = false;
-                    Controller.SetSail();
-                }
-                else
-                {
-                    isAnchored = true;
-                    Controller.AnchorAtPort(portIndex);
-                }
+
+                isAnchored = true;
+                Controller.AnchorAtPort(port);
+                tryAnchor = false;
                 SailSpeed.SwitchAnchor();
             }
         }
+        else { canAnchor = false; }
     }
 }

@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PortMenuController : MonoBehaviour
 {
     [SerializeField] GameObject PortMenuGUI;
+    [SerializeField] TextMeshProUGUI SettingText;
     Animator portMenuAnimator;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,9 +28,11 @@ public class PortMenuController : MonoBehaviour
         //SetActive(false) est déclencher par un animationEvent
     }
 
-    public void activatePort(int portIndex)
+    public void activatePort(PortAnchor port)
     {
         EnablePortMenuGUI();
-
+        SettingText.SetText(port.getSettingDescription());
     }
+
+
 }

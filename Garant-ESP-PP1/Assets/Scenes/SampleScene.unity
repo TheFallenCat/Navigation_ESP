@@ -1995,7 +1995,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 80150421}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.018941576, y: -0.40440494, z: -0.008377651, w: 0.9143455}
+  m_LocalRotation: {x: -0.018941574, y: -0.40440494, z: -0.008377651, w: 0.9143455}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3902,9 +3902,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Rudder: {fileID: 633776058}
   SteerPower: 2000
-  Power: 5
   Drag: 10
   isAnchored: 0
+  canAnchor: 0
 --- !u!114 &166300074
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20103,7 +20103,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.0023508964, y: -0.40449038, z: -0.0010397752, w: 0.9145387}
+  m_LocalRotation: {x: -0.0023508982, y: -0.40449038, z: -0.001039776, w: 0.9145387}
   m_LocalPosition: {x: 525.6879, y: 2.2, z: 386.70816}
   m_LocalScale: {x: 3.44, y: 5.29, z: 6.24}
   m_ConstrainProportionsScale: 0
@@ -20484,6 +20484,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1579838944}
     m_Modifications:
+    - target: {fileID: 4720124107402369273, guid: 3a1041cd6edbb284884974eb5f14b333, type: 3}
+      propertyPath: m_Radius
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5895972775101305062, guid: 3a1041cd6edbb284884974eb5f14b333, type: 3}
       propertyPath: m_LocalPosition.x
       value: 11.350006
@@ -20528,7 +20532,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: AnchorPoint
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8612491901247922424, guid: 3a1041cd6edbb284884974eb5f14b333, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -38263,7 +38268,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1945285019}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.002350895, y: -0.40449038, z: -0.001039775, w: 0.9145387}
+  m_LocalRotation: {x: -0.002350896, y: -0.40449038, z: -0.0010397753, w: 0.9145387}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -41470,6 +41475,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PortMenuGUI: {fileID: 1088260275}
+  SettingText: {fileID: 599790180}
 --- !u!1 &2142033015
 GameObject:
   m_ObjectHideFlags: 0
