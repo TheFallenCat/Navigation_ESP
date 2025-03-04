@@ -7,15 +7,15 @@ public class PortAnchor : MonoBehaviour
 
     //To parse from JSON file later
     [System.Serializable]
-    struct portStatus
+    struct PortStatus
     {
         public int statusIndex;
         public string settingDescription;
-        public List<portAction> portActions;
+        public List<PortAction> portActions;
     }
 
     [System.Serializable]
-    struct portAction
+    struct PortAction
     {
         public string actionName;
         public int actionEffect;
@@ -24,7 +24,7 @@ public class PortAnchor : MonoBehaviour
     public int portIndex;
     public int portProgressIndex;
 
-    [SerializeField] List<portStatus> PortData;
+    [SerializeField] List<PortStatus> PortData;
     
     public string getSettingDescription()
     {
