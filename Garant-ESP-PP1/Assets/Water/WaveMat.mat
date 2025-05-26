@@ -86,7 +86,7 @@ Material:
     - _Color: {r: 0.13920254, g: 0.1486344, b: 0.5018867, a: 0.19215687}
     - _Direction: {r: 1.82, g: 1.5, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _PrimaryWave: {r: -0.30979753, g: -0.950803, b: 0.15001059, a: 50}
+    - _PrimaryWave: {r: -0.7709605, g: -0.63688415, b: 0.14999755, a: 50}
     - _SecondaryWave: {r: 0.7, g: 0.7, b: 0.06, a: 30}
     - _TurbulanceWave: {r: -1, g: 0.3, b: 0.06, a: 10}
     - _WaveA: {r: 0.02, g: -0.02, b: 0.39, a: 36.95}
