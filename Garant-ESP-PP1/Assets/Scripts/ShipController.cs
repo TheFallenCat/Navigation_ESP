@@ -9,6 +9,7 @@ public class ShipController : MonoBehaviour
 {
     //visible Properties
     [SerializeField] Transform Rudder;
+    [SerializeField] Transform Sail;
     [SerializeField] float SteerPower = 500f;
     [SerializeField] float Drag = 0.1f;
 
@@ -31,11 +32,26 @@ public class ShipController : MonoBehaviour
         Controller = GameObject.Find("Controller").GetComponent<Controller>();
     }
 
+    void RaiseSail()
+    {
+        if (Sail.localScale.y >= 0.2)
+        {
+            Sail.localScale -= new Vector3(0, 0.1f * Time.fixedDeltaTime, 0);
+            Debug.Log("Raise");
+        }
+    }
+
+    void LowerSail()
+    {
+        if (Sail.localScale.y <= 1)
+        {
+            Sail.localScale += new Vector3(0, 0.1f * Time.fixedDeltaTime, 0);
+            Debug.Log("Lower");
+        }
+    }
+
     public void FixedUpdate()
     {
-        //default direction
-        var forceDirection = transform.forward;
-
         //steer
         var steer = 0;
         if (Input.GetKey(KeyCode.A))
@@ -43,6 +59,16 @@ public class ShipController : MonoBehaviour
         if (Input.GetKey(KeyCode.D))
             steer = -1;
         Steering(steer);
+
+        if (Input.GetKey(KeyCode.S))
+        {
+            RaiseSail();
+        }
+
+        if (Input.GetKey(KeyCode.W))
+        {
+            LowerSail();
+        }
     }
 
     private void Update()
