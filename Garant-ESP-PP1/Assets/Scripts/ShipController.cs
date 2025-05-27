@@ -37,7 +37,7 @@ public class ShipController : MonoBehaviour
         if (Sail.localScale.y >= 0.2)
         {
             Sail.localScale -= new Vector3(0, 0.1f * Time.fixedDeltaTime, 0);
-            Debug.Log("Raise");
+            SailSpeed.sailEfficiency -= 0.1f * Time.fixedDeltaTime;
         }
     }
 
@@ -46,7 +46,7 @@ public class ShipController : MonoBehaviour
         if (Sail.localScale.y <= 1)
         {
             Sail.localScale += new Vector3(0, 0.1f * Time.fixedDeltaTime, 0);
-            Debug.Log("Lower");
+            SailSpeed.sailEfficiency += 0.1f * Time.fixedDeltaTime;
         }
     }
 

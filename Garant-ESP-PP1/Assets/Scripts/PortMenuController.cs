@@ -31,7 +31,6 @@ public class PortMenuController : MonoBehaviour
     public void activatePort(PortAnchor port)
     {
         EnablePortMenuGUI();
-        SettingText.SetText(port.getSettingDescription());
     }
 
 
