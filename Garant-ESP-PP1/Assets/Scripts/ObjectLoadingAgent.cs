@@ -7,7 +7,7 @@ public class ObjectLoadingAgent : MonoBehaviour
     [SerializeField] Transform player;
     //List of GameObjects that are to be unloaded when far away
     [SerializeField] GameObject[] unloadables;
-    [SerializeField] float loadRadius = 50.0f;
+    [SerializeField] float loadRadius = 300.0f;
     [SerializeField] float loadTimer = 1f;
 
     // Start is called before the first frame update
