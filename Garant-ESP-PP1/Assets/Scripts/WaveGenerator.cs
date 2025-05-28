@@ -76,7 +76,7 @@ public class WaveGenerator : MonoBehaviour
         float a = wave.steepness / k;                // Amplitude
 
         // Wave function
-        float f = k * (Vector2.Dot(d, new Vector2(position.x, position.z)) - c * time);
+        float f = k * (Vector2.Dot(d, new Vector2(position.x, position.z)) - c * time * 0.5f);
 
         // Apply the function
         float dx = d.x * (a * Mathf.Cos(f));

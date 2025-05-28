@@ -8,6 +8,7 @@ public class SailSpeed : MonoBehaviour
     [SerializeField] Transform sail; // The sail Transform
     [SerializeField] WindGenerator windGenerator;
 
+
     [SerializeField] float MaxSpeed = 10f;
 
     public float forceOnSail;
@@ -34,7 +35,7 @@ public class SailSpeed : MonoBehaviour
         {
             force = 5f;
         }
-        forceOnSail = sailEfficiency * force * atSea;
+        forceOnSail = (sailEfficiency - 0.2f) * force * atSea;
         
 
         //if (Input.GetKey(KeyCode.A) | Input.GetKey(KeyCode.D))

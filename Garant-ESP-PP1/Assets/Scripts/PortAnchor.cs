@@ -4,4 +4,5 @@ using UnityEngine;
 
 public class PortAnchor : MonoBehaviour
 {
+    public TextAsset inkJson;
 }

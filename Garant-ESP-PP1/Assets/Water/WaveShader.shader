@@ -70,7 +70,7 @@ Shader "Custom/WaveShader"
             //Normalize _Direction vector to make it of unit length
             float2 d = normalize(wave.xy);
             //Wave function
-            float f = k * (dot(d,p.xz) - c * _Time.y);
+            float f = k * (dot(d,p.xz) - c * _Time.y * 0.5);
             //Amplitude
             float a = steepness / k;
 

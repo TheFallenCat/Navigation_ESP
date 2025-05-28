@@ -13,12 +13,14 @@ public class ShipController : MonoBehaviour
     [SerializeField] float SteerPower = 500f;
     [SerializeField] float Drag = 0.1f;
 
-
+    public const float MIN_SAIL_SIZE = 0.2f;
+    public const float MAX_SAIL_SIZE = 1;
+    const float SAIL_RAISING_SPEED = 0.1f;
 
     //used Components
     Rigidbody Rigidbody;
     SailSpeed SailSpeed;
-    Controller Controller;
+    PortMenuController portMenuController;
 
 
     public bool isAnchored = false;
@@ -29,24 +31,24 @@ public class ShipController : MonoBehaviour
     {
         Rigidbody = GetComponent<Rigidbody>();
         SailSpeed = GetComponent<SailSpeed>();
-        Controller = GameObject.Find("Controller").GetComponent<Controller>();
+        portMenuController = GameObject.Find("Controller").GetComponent<PortMenuController>();
     }
 
     void RaiseSail()
     {
-        if (Sail.localScale.y >= 0.2)
+        if (Sail.localScale.y >= MIN_SAIL_SIZE)
         {
-            Sail.localScale -= new Vector3(0, 0.1f * Time.fixedDeltaTime, 0);
-            SailSpeed.sailEfficiency -= 0.1f * Time.fixedDeltaTime;
+            Sail.localScale -= new Vector3(0, SAIL_RAISING_SPEED * Time.fixedDeltaTime, 0);
+            SailSpeed.sailEfficiency -= SAIL_RAISING_SPEED * Time.fixedDeltaTime;
         }
     }
 
     void LowerSail()
     {
-        if (Sail.localScale.y <= 1)
+        if (Sail.localScale.y <= MAX_SAIL_SIZE)
         {
-            Sail.localScale += new Vector3(0, 0.1f * Time.fixedDeltaTime, 0);
-            SailSpeed.sailEfficiency += 0.1f * Time.fixedDeltaTime;
+            Sail.localScale += new Vector3(0, SAIL_RAISING_SPEED * Time.fixedDeltaTime, 0);
+            SailSpeed.sailEfficiency += SAIL_RAISING_SPEED * Time.fixedDeltaTime;
         }
     }
 
@@ -79,7 +81,7 @@ public class ShipController : MonoBehaviour
             if (isAnchored)
             {
                 isAnchored = false;
-                Controller.SetSail();
+                portMenuController.SetSail();
                 SailSpeed.SwitchAnchor();
             } else
             {
@@ -124,7 +126,7 @@ public class ShipController : MonoBehaviour
             {
 
                 isAnchored = true;
-                Controller.AnchorAtPort(port);
+                portMenuController.AnchorAtPort(port.inkJson);
                 tryAnchor = false;
                 SailSpeed.SwitchAnchor();
             }
