@@ -12,8 +12,27 @@ Sur le bord du quai se trouvent des montagnes immenses d'ordures. L'Île Dépoto
 
 === trashIsland ===
 La petite fille se penche au sol en écrasant le raton-laveur contre son corps. Elle semble perdue dans sa recherche. #character:RaccoonGirl
++ [Interroger la jeune fille]
+    -> questions
 + [Retourner au quai]
     -> main
+
+=== questions ===
+La petite fille se penche au sol en écrasant le raton-laveur contre son corps. Elle semble perdue dans sa recherche. #character:RaccoonGirl
++ ["Que fais-tu ici?"]
+    "Il y a tellement de belles choses sur cette île! Les gens sur les bateaux débarquent pas longtemps d'habitude. Il font juste déposer leurs affaires et comme aucun d'entre eux sont revenus les chercher... Bah, je me sert!
+    -> questions
++ ["Où mène la grande porte derrière toi?"]
+    "J'en ai aucune idée! Elle est barrée, mais c'est pas grave! Je vis bien à l'extérieur. J'ai seulement à me mettre dans un sac quand il pleut." 
+    -> questions
+{trashKey:
++ ["J'ai trouvé cette clé."]
+    "Waw! Tu crois que ça peut ouvrir la porte?" La petite fille est tellement contente que tu crois que le raton va manquer d'air dans ses bras.
+    -> questions
+}
+
++ [Retour]
+    -> trashIsland
 
 === firstVisit ===
 En mettant le pied sur le ponton, l'odeur de vidange est insuportable. Plusieurs membres d'équipage qui souffraient déjà du mal de mer se vident les trippes par dessus bord. Pour le bien être de tous, mieux vos y aller seul.

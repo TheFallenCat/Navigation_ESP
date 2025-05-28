@@ -24,7 +24,7 @@ public class ShipController : MonoBehaviour
 
 
     public bool isAnchored = false;
-    public bool canAnchor = false;
+    public PortAnchor portInRange;
     public bool tryAnchor = false;
 
     public void Awake()
@@ -32,6 +32,7 @@ public class ShipController : MonoBehaviour
         Rigidbody = GetComponent<Rigidbody>();
         SailSpeed = GetComponent<SailSpeed>();
         portMenuController = GameObject.Find("Controller").GetComponent<PortMenuController>();
+        portInRange = null;
     }
 
     void RaiseSail()
@@ -50,6 +51,11 @@ public class ShipController : MonoBehaviour
             Sail.localScale += new Vector3(0, SAIL_RAISING_SPEED * Time.fixedDeltaTime, 0);
             SailSpeed.sailEfficiency += SAIL_RAISING_SPEED * Time.fixedDeltaTime;
         }
+    }
+
+    public void SwitchAnchor()
+    {
+        SailSpeed.SwitchAnchor();
     }
 
     public void FixedUpdate()
@@ -71,30 +77,6 @@ public class ShipController : MonoBehaviour
         {
             LowerSail();
         }
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-
-            if (isAnchored)
-            {
-                isAnchored = false;
-                portMenuController.SetSail();
-                SailSpeed.SwitchAnchor();
-            } else
-            {
-                StartCoroutine(TryAnchor());
-            }
-        }
-    }
-
-    IEnumerator TryAnchor()
-    {
-        tryAnchor = true;
-        yield return new WaitForFixedUpdate();
-        tryAnchor = false;
     }
 
     void Steering(int steer)
@@ -120,17 +102,17 @@ public class ShipController : MonoBehaviour
         //Check for ports, 
         if (other.CompareTag("AnchorPoint"))
         {
-            canAnchor = true;
-            PortAnchor port = other.GetComponent<PortAnchor>();
-            if (tryAnchor)
-            {
-
-                isAnchored = true;
-                portMenuController.AnchorAtPort(port.inkJson);
-                tryAnchor = false;
-                SailSpeed.SwitchAnchor();
-            }
+            portInRange = other.GetComponent<PortAnchor>();
         }
-        else { canAnchor = false; }
+        else { portInRange = null; }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        //Check for ports, 
+        if (other.CompareTag("AnchorPoint"))
+        {
+            portInRange = null;
+        }
     }
 }

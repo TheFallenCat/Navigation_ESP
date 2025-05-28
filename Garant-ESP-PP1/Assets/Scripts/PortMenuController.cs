@@ -14,15 +14,24 @@ public class PortMenuController : MonoBehaviour
     [SerializeField] RawImage CharacterSprite;
     Animator portMenuAnimator;
     [SerializeField ]Animator characterAnimator;
+
+
+    //Anchor
     [SerializeField] CinemachineFreeLook freeLook;
+    [SerializeField] ShipController shipController;
 
     [SerializeField] GameObject[] actions;
     TextMeshProUGUI[] actionsText;
 
     private Story currentStory;
+
     private bool dialogueIsPlaying;
     DialogueVariables dialogueVariables;
     [SerializeField] InkFile globalsInkFile;
+    [SerializeField] PortAnchor firstPort;
+
+    
+
 
     const string CHARACTER_TAG = "character";
 
@@ -45,6 +54,7 @@ public class PortMenuController : MonoBehaviour
                     actionsText[i] = childrenText;
             }   
         }
+        AnchorAtPort(firstPort.inkJson);
     }
 
     public void EnablePortMenuGUI()
@@ -94,7 +104,7 @@ public class PortMenuController : MonoBehaviour
             dialogueVariables.StopListening(currentStory);
             dialogueIsPlaying = false;
             settingText.text = "";
-            SetSail();
+            RaiseAnchor();
         }
     }
 
@@ -142,21 +152,16 @@ public class PortMenuController : MonoBehaviour
         ContinueStory();
     }
 
-    private void Update()
-    {
-        if (!dialogueIsPlaying)
-        {
-            return;
-        }
-    }
-
     private void LockCameraControl() => freeLook.enabled = false;
     private void UnlockCameraControl() => freeLook.enabled = true;
 
     public void AnchorAtPort(TextAsset inkJson)
     {
+        shipController.isAnchored = true;
         LockCameraControl();
         activatePort(inkJson);
+        shipController.tryAnchor = false;
+        shipController.SwitchAnchor();
     }
 
     public void SetSail()
@@ -164,4 +169,35 @@ public class PortMenuController : MonoBehaviour
         UnlockCameraControl();
         DisablePortMenuGUI();
     }
+
+    //Anchor 
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.E) && !shipController.isAnchored)
+        {
+            StartCoroutine(TryAnchor());
+        }
+
+        if (shipController.portInRange != null && shipController.tryAnchor)
+        {
+                AnchorAtPort(shipController.portInRange.inkJson);
+        }
+    }
+
+    public void RaiseAnchor()
+    {
+        shipController.isAnchored = false;
+        SetSail();
+        shipController.SwitchAnchor();
+    }
+
+    IEnumerator TryAnchor()
+    {
+        shipController.tryAnchor = true;
+        yield return new WaitForFixedUpdate();
+        shipController.tryAnchor = false;
+    }
+
+
 }

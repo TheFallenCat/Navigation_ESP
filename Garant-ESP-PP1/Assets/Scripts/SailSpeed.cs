@@ -31,9 +31,13 @@ public class SailSpeed : MonoBehaviour
         if (angleEfficiency < 0)
             angleEfficiency = 0;
         float force = windGenerator.activeWindSpeed * angleEfficiency * 5;
-        if (force <= 5f)
+        if (force < 5f)
         {
             force = 5f;
+        }
+        else if (force > 30f)
+        {
+            force = 30f;
         }
         forceOnSail = (sailEfficiency - 0.2f) * force * atSea;
         
