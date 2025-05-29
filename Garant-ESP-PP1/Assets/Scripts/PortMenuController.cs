@@ -4,19 +4,19 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using Ink.Runtime;
-using Ink.UnityIntegration;
 using Cinemachine;
 
 public class PortMenuController : MonoBehaviour
 {
-    [SerializeField] GameObject PortMenuGUI;
+    [SerializeField] GameObject portMenuGUI;
     [SerializeField] TextMeshProUGUI settingText;
-    [SerializeField] RawImage CharacterSprite;
+    [SerializeField] RawImage characterSprite;
     Animator portMenuAnimator;
-    [SerializeField ]Animator characterAnimator;
+    [SerializeField] Animator characterAnimator;
+    [SerializeField] Animator mapAnimator;
 
 
-    //Anchor
+    //Anchor controls
     [SerializeField] CinemachineFreeLook freeLook;
     [SerializeField] ShipController shipController;
 
@@ -25,9 +25,9 @@ public class PortMenuController : MonoBehaviour
 
     private Story currentStory;
 
-    private bool dialogueIsPlaying;
     DialogueVariables dialogueVariables;
-    [SerializeField] InkFile globalsInkFile;
+    [SerializeField] TextAsset loadGlobalsJSON;
+    //[SerializeField] InkFile globalsInkFile;
     [SerializeField] PortAnchor firstPort;
 
     
@@ -39,10 +39,9 @@ public class PortMenuController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        portMenuAnimator = PortMenuGUI.GetComponent<Animator>();
-        dialogueVariables = new DialogueVariables(globalsInkFile.filePath);
-        PortMenuGUI.SetActive(false);
-        dialogueIsPlaying = false;
+        portMenuAnimator = portMenuGUI.GetComponent<Animator>();
+        dialogueVariables = new DialogueVariables(loadGlobalsJSON);
+        portMenuGUI.SetActive(false);
 
         actionsText = new TextMeshProUGUI[actions.Length];
         for (int i = 0; i < actions.Length; i++)
@@ -59,12 +58,21 @@ public class PortMenuController : MonoBehaviour
 
     public void EnablePortMenuGUI()
     {
-        PortMenuGUI.SetActive(true);
+        portMenuGUI.SetActive(true);
+        if (mapAnimator != null)
+        {
+            mapAnimator.Play("SlideOut");
+        }
+        
         portMenuAnimator.SetTrigger("ActivatePortMenu");
     }
 
     public void DisablePortMenuGUI()
     {
+        if (mapAnimator != null)
+        {
+            mapAnimator.Play("SlideIn");
+        }
         portMenuAnimator.SetTrigger("ClosePortMenu");
         //SetActive(false) est déclencher par un animationEvent
     }
@@ -72,7 +80,6 @@ public class PortMenuController : MonoBehaviour
     public void activatePort(TextAsset inkJson)
     {
         currentStory = new Story(inkJson.text);
-        dialogueIsPlaying = true;
         EnablePortMenuGUI();
         settingText.text = "";
 
@@ -102,7 +109,6 @@ public class PortMenuController : MonoBehaviour
         else
         {
             dialogueVariables.StopListening(currentStory);
-            dialogueIsPlaying = false;
             settingText.text = "";
             RaiseAnchor();
         }
@@ -174,15 +180,19 @@ public class PortMenuController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && !shipController.isAnchored)
+        if (shipController != null)
         {
-            StartCoroutine(TryAnchor());
+            if (Input.GetKeyDown(KeyCode.E) && !shipController.isAnchored)
+            {
+                StartCoroutine(TryAnchor());
+            }
+
+            if (shipController.portInRange != null && shipController.tryAnchor)
+            {
+                AnchorAtPort(shipController.portInRange.inkJson);
+            }
         }
 
-        if (shipController.portInRange != null && shipController.tryAnchor)
-        {
-                AnchorAtPort(shipController.portInRange.inkJson);
-        }
     }
 
     public void RaiseAnchor()

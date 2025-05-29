@@ -90,7 +90,7 @@ public class WaveGenerator : MonoBehaviour
     public float GetWaveHeightAtPosition(Vector3 position, float time)
     {
         Vector3 p = Vector3.zero;
-        Vector3 seaLevelPosition = new Vector3(position.x, -1f, position.z);
+        Vector3 seaLevelPosition = new Vector3(position.x, this.transform.position.y, position.z);
 
         // Add contributions from all waves
         p += CalculateGerstnerWave(seaLevelPosition, primaryWave, time);

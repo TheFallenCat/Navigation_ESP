@@ -24,8 +24,11 @@ public class WindGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        activeWindDirection = new Vector3(1, 0, 0);
-        onHighSea = true;
+        // On s'assure d'avoir un vecteur de direction pour simuler les vagues.
+        if (activeWindDirection.magnitude == 0)
+        {
+            activeWindDirection = new Vector3(1, 0, 0);
+        }
         StartCoroutine(SwitchWindType());
     }
 

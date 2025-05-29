@@ -18,8 +18,7 @@ public class SailSpeed : MonoBehaviour
     public float atSea = 1;
 
     void FixedUpdate()
-    {
-
+    { 
 
         // Get sail direction
         Vector3 sailDirection = sail.forward;
@@ -31,13 +30,9 @@ public class SailSpeed : MonoBehaviour
         if (angleEfficiency < 0)
             angleEfficiency = 0;
         float force = windGenerator.activeWindSpeed * angleEfficiency * 5;
-        if (force < 5f)
+        if (force < 10f)
         {
-            force = 5f;
-        }
-        else if (force > 30f)
-        {
-            force = 30f;
+            force = 10f;
         }
         forceOnSail = (sailEfficiency - 0.2f) * force * atSea;
         
@@ -48,6 +43,8 @@ public class SailSpeed : MonoBehaviour
         // Apply force to the boat
         ApplyForceToReachVelocity(rb, transform.forward * MaxSpeed, forceOnSail);
     }
+
+
 
     public void SwitchAnchor()
     {

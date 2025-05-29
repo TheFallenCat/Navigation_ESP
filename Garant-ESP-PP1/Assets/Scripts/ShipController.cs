@@ -15,12 +15,12 @@ public class ShipController : MonoBehaviour
 
     public const float MIN_SAIL_SIZE = 0.2f;
     public const float MAX_SAIL_SIZE = 1;
-    const float SAIL_RAISING_SPEED = 0.1f;
+    const float SAIL_RAISING_SPEED = 0.2f;
+    const float SAIL_LOWERING_SPEED = 0.5f;
 
     //used Components
     Rigidbody Rigidbody;
     SailSpeed SailSpeed;
-    PortMenuController portMenuController;
 
 
     public bool isAnchored = false;
@@ -31,7 +31,6 @@ public class ShipController : MonoBehaviour
     {
         Rigidbody = GetComponent<Rigidbody>();
         SailSpeed = GetComponent<SailSpeed>();
-        portMenuController = GameObject.Find("Controller").GetComponent<PortMenuController>();
         portInRange = null;
     }
 
@@ -48,8 +47,8 @@ public class ShipController : MonoBehaviour
     {
         if (Sail.localScale.y <= MAX_SAIL_SIZE)
         {
-            Sail.localScale += new Vector3(0, SAIL_RAISING_SPEED * Time.fixedDeltaTime, 0);
-            SailSpeed.sailEfficiency += SAIL_RAISING_SPEED * Time.fixedDeltaTime;
+            Sail.localScale += new Vector3(0, SAIL_LOWERING_SPEED * Time.fixedDeltaTime, 0);
+            SailSpeed.sailEfficiency += SAIL_LOWERING_SPEED * Time.fixedDeltaTime;
         }
     }
 
@@ -94,8 +93,6 @@ public class ShipController : MonoBehaviour
         //move in direction
         Rigidbody.velocity = Quaternion.AngleAxis(Vector3.SignedAngle(Rigidbody.velocity, (movingForward ? 1f : 0f) * transform.forward, Vector3.up) * Drag, Vector3.up) * Rigidbody.velocity;
     }
-
-
 
     private void OnTriggerStay(Collider other)
     {

@@ -5,7 +5,7 @@ VAR trashKey = false
 VAR visitedTrashIsland = false
 VAR visitedCentralsland = false
 VAR visitedSirenSpire = false
-VAR visitedGoblinStand = false
-VAR visitedCultistCoast = false
+VAR visitedGoblinIsland = false
+VAR visitedCultistIsland = false
 
 
