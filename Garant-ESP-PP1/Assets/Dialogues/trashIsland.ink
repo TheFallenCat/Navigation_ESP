@@ -33,7 +33,7 @@ Tu entre dans la grotte qui était dissimulé derrière la porte de l'île. À l
 Sur le dessus de l'autel se trouve un perle magnifique.
 * [Prendre la perle]
     ~ sirenOrb = true
-    -> entrerGrotte
+    -> afterOrb
 }
 + {abyssStatue == true} [Mettre la statuette sur l'autel]
     Les murs de la grotte grincent et tremble à l'instant où tu déposes la statuette sur l'autel. Tu as le sentiment étrange au fond de ton être que quelque chose de terrible est sur le point de se produire.
@@ -41,6 +41,11 @@ Sur le dessus de l'autel se trouve un perle magnifique.
     ~ endingDoomsdayRitual = true
     + + [GAME OVER]
         -> END
++ [Sortir de la grotte]
+    -> trashIsland
+
+=== afterOrb ===
+La perle brillent dans tes mains. Sa teinte crémeuse est presque hypnotisante. Elle veut sortir d'ici.
 + [Sortir de la grotte]
     -> trashIsland
     

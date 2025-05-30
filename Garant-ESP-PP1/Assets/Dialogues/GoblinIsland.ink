@@ -20,9 +20,9 @@ Il te tire presque par le bras pour t’approcher de son bazar. Une vieille clé
 -> goblinMarket
 
 === goblinMarket ===
-Le gobelin t’observe avec un mélange d’espoir et de désespoir. Derrière lui, des boîtes s'empilent, certaines bougent encore. {trashKey == true:Mais son regard revient toujours vers la vieille clé suspendue.}
-
-
+Le gobelin t’observe avec un mélange d’espoir et de désespoir. Derrière lui, des boîtes s'empilent, certaines bougent encore. {trashKey == false:Mais son regard revient toujours vers la vieille clé suspendue.}
+-> goblinQuestions
+=== goblinQuestions ===
 {trashKey == false:
     + [Accepter la clé]
         Le gobelin te la fourre dans les mains avant que tu puisses protester.
@@ -36,7 +36,7 @@ Le gobelin t’observe avec un mélange d’espoir et de désespoir. Derrière l
     + [Refuser la clé]
         "Non?? TU VAS LE REGRETTER! C’est gratuit!! C’est une opportunité en or!! GAAAH!!"
         Il se roule par terre, déchirant une ancienne facture à pleines dents.
-        -> goblinMarket
+        -> goblinQuestions
 }
 + [Retourner au quai]
     -> main

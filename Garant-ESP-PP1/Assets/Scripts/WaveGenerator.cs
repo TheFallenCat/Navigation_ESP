@@ -56,7 +56,11 @@ public class WaveGenerator : MonoBehaviour
     {
         SetPrimaryWave(windGenerator.activeWindDirection, windGenerator.activeWindSpeed);
     }
-
+    /// <summary>
+    /// Modify Ocean Material to correspond with active wind
+    /// </summary>
+    /// <param name="activeWindDirection"></param>
+    /// <param name="activeWindSpeed"></param>
     void SetPrimaryWave(Vector3 activeWindDirection, float activeWindSpeed)
     {
 
@@ -66,7 +70,13 @@ public class WaveGenerator : MonoBehaviour
         primaryWave.steepness = newWave.z;
         
     }
-
+    /// <summary>
+    /// Recreate Shader Calculation
+    /// </summary>
+    /// <param name="position"></param>
+    /// <param name="wave"></param>
+    /// <param name="time"></param>
+    /// <returns></returns>
     private Vector3 CalculateGerstnerWave(Vector3 position, GerstnerWave wave, float time)
     {
         // Wave parameters
@@ -86,7 +96,6 @@ public class WaveGenerator : MonoBehaviour
         return new Vector3(dx, dy, dz);
     }
 
-    // Get wave height at a position
     public float GetWaveHeightAtPosition(Vector3 position, float time)
     {
         Vector3 p = Vector3.zero;
@@ -101,40 +110,6 @@ public class WaveGenerator : MonoBehaviour
         // Return the water height
         return seaLevelPosition.y + p.y;
     }
-
-    /* 
-    
-    Vector3 GetClosestVertexAtPosition(Vector3[] vertices, Vector3 position)
-    {
-        position = transform.InverseTransformPoint(position);
-
-        float minDistanceSqr = Mathf.Infinity;
-        Vector3 nearestVertex = Vector3.zero;
-
-        // scan all vertices to find nearest
-        foreach (Vector3 vertex in vertices)
-        {
-            Vector3 diff = position - vertex;
-            float distSqr = diff.sqrMagnitude;
-
-            if (distSqr < minDistanceSqr)
-            {
-                minDistanceSqr = distSqr;
-                nearestVertex = vertex;
-            }
-        }
-
-        // convert nearest vertex back to world space
-        return transform.TransformPoint(nearestVertex);
-    }
-
-    float GetWaveHeightAtPosition(Vector3 position)
-    {
-        Vector3[] vertices = floatingWaterMeshFilter.mesh.vertices;
-        Vector3 vertex = GetClosestVertexAtPosition(vertices, position);
-        return vertex.y;
-    }
-    */
 
 
 }

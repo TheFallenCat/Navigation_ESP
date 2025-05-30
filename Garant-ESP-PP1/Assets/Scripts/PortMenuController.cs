@@ -8,9 +8,12 @@ using Cinemachine;
 
 public class PortMenuController : MonoBehaviour
 {
+    // Menu
     [SerializeField] GameObject portMenuGUI;
     [SerializeField] TextMeshProUGUI settingText;
     [SerializeField] RawImage characterSprite;
+
+    // Animation
     Animator portMenuAnimator;
     [SerializeField] Animator characterAnimator;
     [SerializeField] Animator mapAnimator;
@@ -20,19 +23,19 @@ public class PortMenuController : MonoBehaviour
     [SerializeField] CinemachineFreeLook freeLook;
     [SerializeField] ShipController shipController;
 
+    //Ink stories
     [SerializeField] GameObject[] actions;
     TextMeshProUGUI[] actionsText;
-
     private Story currentStory;
 
+    //Global variables
     DialogueVariables dialogueVariables;
     [SerializeField] TextAsset loadGlobalsJSON;
-    //[SerializeField] InkFile globalsInkFile;
+
+    //First Story
     [SerializeField] PortAnchor firstPort;
 
-    
-
-
+    //Tag Handling
     const string CHARACTER_TAG = "character";
 
 
@@ -43,6 +46,7 @@ public class PortMenuController : MonoBehaviour
         dialogueVariables = new DialogueVariables(loadGlobalsJSON);
         portMenuGUI.SetActive(false);
 
+        // Prepare action buttons according to what is supported by the UI
         actionsText = new TextMeshProUGUI[actions.Length];
         for (int i = 0; i < actions.Length; i++)
         {
@@ -53,9 +57,13 @@ public class PortMenuController : MonoBehaviour
                     actionsText[i] = childrenText;
             }   
         }
+
+        // Start First story
         AnchorAtPort(firstPort.inkJson);
     }
-
+    /// <summary>
+    /// Opens the port menu and slides the map out of the way.
+    /// </summary>
     public void EnablePortMenuGUI()
     {
         portMenuGUI.SetActive(true);
@@ -66,7 +74,9 @@ public class PortMenuController : MonoBehaviour
         
         portMenuAnimator.SetTrigger("ActivatePortMenu");
     }
-
+    /// <summary>
+    /// CLoses the port menu and slides the map back in.
+    /// </summary>
     public void DisablePortMenuGUI()
     {
         if (mapAnimator != null)
@@ -74,9 +84,12 @@ public class PortMenuController : MonoBehaviour
             mapAnimator.Play("SlideIn");
         }
         portMenuAnimator.SetTrigger("ClosePortMenu");
-        //SetActive(false) est déclencher par un animationEvent
+        //SetActive(false) est déclencher par un animationEvent pour s'assurer que l'animation soit terminé avant de désactiver.
     }
-
+    /// <summary>
+    /// Starts the story associated with that port
+    /// </summary>
+    /// <param name="inkJson">The port story</param>
     public void activatePort(TextAsset inkJson)
     {
         currentStory = new Story(inkJson.text);
@@ -87,7 +100,10 @@ public class PortMenuController : MonoBehaviour
 
         ContinueStory();
     }
-
+    /// <summary>
+    /// Iterates throught the story until the player has to make a choice. If the story ends, closes the menu.
+    /// On story end, end conditons are checked.
+    /// </summary>
     void ContinueStory()
     {
         if (currentStory.canContinue)
@@ -113,6 +129,10 @@ public class PortMenuController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Check for tags and proceed according to tag behavior.
+    /// </summary>
+    /// <param name="currentTags"></param>
     void HandleTags(List<string> currentTags)
     {
         foreach (string tag in currentTags)
@@ -131,7 +151,9 @@ public class PortMenuController : MonoBehaviour
             }
         }
     }
-
+    /// <summary>
+    /// Populate the actions in action bar with story choices.
+    /// </summary>
     void DisplayActions()
     {
         List<Choice> currentActions = currentStory.currentChoices;
@@ -147,7 +169,10 @@ public class PortMenuController : MonoBehaviour
             actions[i].gameObject.SetActive(false);
         }
     }
-
+    /// <summary>
+    /// Called by action button to make a choice.
+    /// </summary>
+    /// <param name="actionIndex"></param>
     public void DoAction(int actionIndex)
     {
         Debug.Log(actionIndex);
@@ -155,6 +180,12 @@ public class PortMenuController : MonoBehaviour
         settingText.text = "";
         ContinueStory();
     }
+
+    /// <summary>
+    /// Read from story global variables.
+    /// </summary>
+    /// <param name="variableName"></param>
+    /// <returns></returns>
     public Ink.Runtime.Object GetVariableState(string variableName)
     {
         Ink.Runtime.Object variableValue = null;
@@ -166,6 +197,9 @@ public class PortMenuController : MonoBehaviour
         return variableValue;
     }
 
+    /// <summary>
+    /// Check if any end condition is met, then plays associated endScene
+    /// </summary>
     void CheckForEndCondition()
     {
         if (((Ink.Runtime.BoolValue)GetVariableState("endingWorldTraveler")).value)
@@ -185,6 +219,10 @@ public class PortMenuController : MonoBehaviour
     private void LockCameraControl() => freeLook.enabled = false;
     private void UnlockCameraControl() => freeLook.enabled = true;
 
+    /// <summary>
+    /// Stop ship controls and activate port story
+    /// </summary>
+    /// <param name="inkJson"></param>
     public void AnchorAtPort(TextAsset inkJson)
     {
         shipController.isAnchored = true;
@@ -194,16 +232,19 @@ public class PortMenuController : MonoBehaviour
         shipController.SwitchAnchor();
     }
 
-    public void SetSail()
+    /// <summary>
+    /// Reenable ship controls and stops port story
+    /// </summary>
+    public void RaiseAnchor()
     {
+        shipController.isAnchored = false;
         UnlockCameraControl();
         DisablePortMenuGUI();
+        shipController.SwitchAnchor();
     }
-
-    //Anchor 
-
     private void Update()
     {
+        // Anchor controls
         if (shipController != null)
         {
             if (Input.GetKeyDown(KeyCode.E) && !shipController.isAnchored)
@@ -218,14 +259,10 @@ public class PortMenuController : MonoBehaviour
         }
 
     }
-
-    public void RaiseAnchor()
-    {
-        shipController.isAnchored = false;
-        SetSail();
-        shipController.SwitchAnchor();
-    }
-
+    /// <summary>
+    /// Signals that the player wants to anchor.
+    /// </summary>
+    /// <returns></returns>
     IEnumerator TryAnchor()
     {
         shipController.tryAnchor = true;

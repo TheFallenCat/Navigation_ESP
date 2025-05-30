@@ -10,18 +10,6 @@ public class DialogueVariables
 
     public DialogueVariables(TextAsset loadGlobalsJSON)
     {
-        /*Compile Globlas.ink
-        string inkFileContents = File.ReadAllText(globalsFilePath);
-        Ink.Compiler compiler = new Ink.Compiler(inkFileContents);
-        Story globalVariablesStory = compiler.Compile();
-
-        //initialize the dictionnary
-        variables = new Dictionary<string, Ink.Runtime.Object>();
-        foreach (string name in globalVariablesStory.variablesState)
-        {
-            Ink.Runtime.Object value = globalVariablesStory.variablesState.GetVariableWithName(name);
-            variables.Add(name, value);
-        }*/
 
         // create the story
         Story globalVariablesStory = new Story(loadGlobalsJSON.text);
@@ -47,7 +35,11 @@ public class DialogueVariables
         story.variablesState.variableChangedEvent -= VariableChanged;
         VariablesToStory(story);
     }
-
+    /// <summary>
+    /// Update Dictionary from Globals.ink
+    /// </summary>
+    /// <param name="name"></param>
+    /// <param name="value"></param>
     void VariableChanged(string name, Ink.Runtime.Object value)
     {
         if (variables.ContainsKey(name))
@@ -56,7 +48,10 @@ public class DialogueVariables
             variables.Add(name, value);
         }
     }
-
+    /// <summary>
+    /// Update Globals.ink from Dictionnary
+    /// </summary>
+    /// <param name="story"></param>
     void VariablesToStory(Story story)
     {
         foreach(KeyValuePair<string, Ink.Runtime.Object> variable in variables)
