@@ -11,4 +11,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/EndingWorldTraveler.unity
+    guid: 5ab8644c9a8f4f848bb0e89f5bac5578
+  - enabled: 1
+    path: Assets/Scenes/EndingSirenPlan.unity
+    guid: 786534dd2cf0e044a82b1ccc6e64d1e3
+  - enabled: 1
+    path: Assets/Scenes/EndingDoomsday.unity
+    guid: 6af5a086291a68840a57380cc9fe47fa
   m_configObjects: {}

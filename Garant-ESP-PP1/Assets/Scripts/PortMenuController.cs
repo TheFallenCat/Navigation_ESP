@@ -94,7 +94,7 @@ public class PortMenuController : MonoBehaviour
         {
             settingText.text += currentStory.Continue();
             settingText.text += "\n";
-
+            HandleTags(currentStory.currentTags);
             if (currentStory.currentChoices.Count < 1)
             {
                 ContinueStory();
@@ -103,14 +103,13 @@ public class PortMenuController : MonoBehaviour
             {
                 DisplayActions();
             }
-
-            HandleTags(currentStory.currentTags);
         }
         else
         {
             dialogueVariables.StopListening(currentStory);
             settingText.text = "";
             RaiseAnchor();
+            CheckForEndCondition();
         }
     }
 
@@ -122,6 +121,7 @@ public class PortMenuController : MonoBehaviour
             string tagKey = splitTag[0].Trim();
             string tagValue = splitTag[1].Trim();
 
+            Debug.Log(tagValue);
             switch (tagKey)
             {
                 case CHARACTER_TAG:
@@ -130,8 +130,6 @@ public class PortMenuController : MonoBehaviour
                 // Add more case for more tags
             }
         }
-
-        
     }
 
     void DisplayActions()
@@ -156,6 +154,32 @@ public class PortMenuController : MonoBehaviour
         currentStory.ChooseChoiceIndex(actionIndex);
         settingText.text = "";
         ContinueStory();
+    }
+    public Ink.Runtime.Object GetVariableState(string variableName)
+    {
+        Ink.Runtime.Object variableValue = null;
+        dialogueVariables.variables.TryGetValue(variableName, out variableValue);
+        if (variableValue == null)
+        {
+            Debug.LogWarning("Ink Variable was found to be null: " + variableName);
+        }
+        return variableValue;
+    }
+
+    void CheckForEndCondition()
+    {
+        if (((Ink.Runtime.BoolValue)GetVariableState("endingWorldTraveler")).value)
+        {
+            GetComponent<Controller>().EndGame(2);
+        }
+        else if (((Ink.Runtime.BoolValue)GetVariableState("endingSirenPlan")).value)
+        {
+            GetComponent<Controller>().EndGame(3);
+        }
+        else if (((Ink.Runtime.BoolValue)GetVariableState("endingDoomsdayRitual")).value)
+        {
+            GetComponent<Controller>().EndGame(4);
+        }
     }
 
     private void LockCameraControl() => freeLook.enabled = false;
@@ -208,6 +232,5 @@ public class PortMenuController : MonoBehaviour
         yield return new WaitForFixedUpdate();
         shipController.tryAnchor = false;
     }
-
 
 }

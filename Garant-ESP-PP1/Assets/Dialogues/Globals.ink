@@ -1,7 +1,11 @@
 // Key Items
 VAR trashKey = false
-VAR SirenOrb = false
+VAR sirenOrb = false
+VAR abyssStatue = false
 
+// Accomplishements
+VAR curedCultist = false
+VAR openedTrashDoor = false
 
 // Islands visited
 VAR visitedTrashIsland = false

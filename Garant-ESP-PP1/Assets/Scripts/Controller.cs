@@ -7,19 +7,11 @@ using UnityEngine.SceneManagement;
 public class Controller : MonoBehaviour
 {
 
-
-    
-    // Start is called before the first frame update
-    void Start()
+    public void EndGame(int sceneIndex)
     {
-        
+        SceneManager.LoadScene(sceneIndex);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void StartNewGame()
     {

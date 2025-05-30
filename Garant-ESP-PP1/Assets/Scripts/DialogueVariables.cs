@@ -6,7 +6,7 @@ using System.IO;
 public class DialogueVariables
 {
 
-    Dictionary<string, Ink.Runtime.Object> variables;
+    public Dictionary<string, Ink.Runtime.Object> variables { get; private set; }
 
     public DialogueVariables(TextAsset loadGlobalsJSON)
     {
@@ -45,6 +45,7 @@ public class DialogueVariables
     public void StopListening(Story story)
     {
         story.variablesState.variableChangedEvent -= VariableChanged;
+        VariablesToStory(story);
     }
 
     void VariableChanged(string name, Ink.Runtime.Object value)
@@ -61,6 +62,9 @@ public class DialogueVariables
         foreach(KeyValuePair<string, Ink.Runtime.Object> variable in variables)
         {
             story.variablesState.SetGlobal(variable.Key, variable.Value);
+            Debug.Log(variable.Key + " changed to " + variable.Value.ToString());
         }
     }
+
+
 }

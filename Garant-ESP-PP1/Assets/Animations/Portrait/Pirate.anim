@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Cultist
+  m_Name: Pirate
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -105,7 +105,7 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 2800000, guid: 94e6b7ad9e9e7b84089ae61305f3e838, type: 3}
+      value: {fileID: 2800000, guid: d51031af12ea6784090146392cfb1104, type: 3}
     attribute: m_Texture
     path: 
     classID: 114
@@ -164,7 +164,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: 2800000, guid: 94e6b7ad9e9e7b84089ae61305f3e838, type: 3}
+    - {fileID: 2800000, guid: d51031af12ea6784090146392cfb1104, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
