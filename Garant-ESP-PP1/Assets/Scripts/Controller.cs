@@ -16,4 +16,12 @@ public class Controller : MonoBehaviour
         SceneManager.LoadScene(1);
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+    }
+
 }
